@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EvidenceChip } from "@/components/EvidenceChip";
+import { ExtractionSpecimen } from "@/components/ExtractionSpecimen";
 import { projects, projectBySlug } from "@/content/projects";
 
 export function generateStaticParams() {
@@ -99,6 +100,7 @@ export default async function WorkPage({
               {section.body.map((paragraph) => (
                 <p key={paragraph.slice(0, 24)}>{paragraph}</p>
               ))}
+              {section.figure === "extraction" ? <ExtractionSpecimen /> : null}
               {section.list ? (
                 <dl className="case-list">
                   {section.list.map((entry) => (

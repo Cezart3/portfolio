@@ -22,6 +22,8 @@ export interface CaseSection {
   title: string;
   body: string[];
   list?: { term: string; text: string }[];
+  /** Renders a worked example under the prose. */
+  figure?: "extraction";
 }
 
 export interface Project {
@@ -100,6 +102,7 @@ export const projects: Project[] = [
           "Rental ads are written by people in a hurry. The heating type might be a sentence, a single word, or an abbreviation. Prices are written with a comma, a dot, or neither, so 350.000 and 350,00 have to be told apart before either becomes a number. Parking might be a garage, an assigned spot, a paid subscription, or a hopeful sentence about the neighbourhood.",
           "The extraction is pure regex rather than a model, deliberately. It is auditable — when a listing gets classified wrong I can see the rule that did it — it runs offline, and it costs nothing per listing. The classifiers cover a heating taxonomy, a parking taxonomy, price-separator disambiguation, street names and landmarks.",
         ],
+        figure: "extraction",
       },
       {
         title: "Geocoding without burning the budget",

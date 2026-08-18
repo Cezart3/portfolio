@@ -1,4 +1,3 @@
-import { ExtractionSpecimen } from "@/components/ExtractionSpecimen";
 import { Section } from "@/components/Section";
 import { WorkIndex } from "@/components/WorkIndex";
 import { site, stack } from "@/content/site";
@@ -29,48 +28,44 @@ export default function Home() {
   return (
     <>
       <section className="hero">
-        <div className="shell hero-grid">
-          <div className="hero-copy">
-            <p className="hero-eyebrow mono-meta rise">
-              {site.role} · {site.location} · open to internships and junior
-              roles
-            </p>
-            <h1 className="display-hero hero-name rise">{site.name}</h1>
-            <p className="hero-thesis rise">{site.thesis}</p>
-            <ul className="hero-links mono-meta rise">
-              <li>
-                <a
-                  className="link-underline"
-                  href={site.links.github}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  GitHub
-                </a>
-              </li>
-              <li>
-                <a
-                  className="link-underline"
-                  href={site.links.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a className="link-underline" href={`mailto:${site.email}`}>
-                  {site.email}
-                </a>
-              </li>
-              <li>
-                <a className="link-underline" href={site.links.cv} download>
-                  CV (PDF)
-                </a>
-              </li>
-            </ul>
-          </div>
-          <ExtractionSpecimen />
+        <div className="shell">
+          <p className="hero-eyebrow mono-meta rise">
+            {site.role} · {site.location} · open to internships and junior roles
+          </p>
+          <h1 className="display-hero hero-name rise">{site.name}</h1>
+          <p className="hero-thesis rise">{site.thesis}</p>
+          <ul className="hero-links mono-meta rise">
+            <li>
+              <a
+                className="link-underline"
+                href={site.links.github}
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a
+                className="link-underline"
+                href={site.links.linkedin}
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a className="link-underline" href={`mailto:${site.email}`}>
+                {site.email}
+              </a>
+            </li>
+            <li>
+              <a className="link-underline" href={site.links.cv} download>
+                CV (PDF)
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
 

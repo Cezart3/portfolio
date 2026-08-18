@@ -1,5 +1,5 @@
 /**
- * The hero specimen: one rental ad, and the record Kira builds out of it.
+ * One rental ad, and the record the pipeline builds out of it.
  * The ad text is written for this page, not copied from a listing site.
  * Highlighted spans map to the fields underneath them.
  */
@@ -17,7 +17,7 @@ export function ExtractionSpecimen() {
   return (
     <figure className="specimen">
       <figcaption className="specimen-cap mono-meta">
-        One rental ad, and the record Kira builds from it
+        A rental ad, and the record built from it
       </figcaption>
 
       <p className="specimen-source" lang="ro">
@@ -28,12 +28,8 @@ export function ExtractionSpecimen() {
       </p>
 
       <dl className="specimen-record mono-meta">
-        {record.map((row, i) => (
-          <div
-            key={row.field}
-            className="specimen-row"
-            style={{ "--row-delay": `${0.45 + i * 0.07}s` } as React.CSSProperties}
-          >
+        {record.map((row) => (
+          <div key={row.field} className="specimen-row">
             <dt>{row.field}</dt>
             <dd>
               {row.value}
