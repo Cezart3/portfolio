@@ -165,6 +165,10 @@
   animation-delay: 0.02s;
 }
 
+.hero-open {
+  color: var(--accent);
+}
+
 .hero-name {
   animation-delay: 0.08s;
 }
@@ -226,8 +230,44 @@
   }
 }
 
+.index-row {
+  --hue: var(--ink-faint);
+  position: relative;
+}
+
+.index-row[data-source="machine"] {
+  --hue: var(--evidence-machine);
+}
+
+.index-row[data-source="person"] {
+  --hue: var(--evidence-person);
+}
+
+.index-row[data-source="world"] {
+  --hue: var(--evidence-world);
+}
+
+/* the row lights up in the colour of whatever vouches for it */
+.index-row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--hue);
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 0.22s cubic-bezier(0.16, 0.84, 0.44, 1);
+}
+
+.index-row:hover::before,
+.index-row:focus-visible::before {
+  transform: scaleY(1);
+}
+
 .index-row:hover {
-  background: var(--accent-wash);
+  background: color-mix(in srgb, var(--hue) 7%, transparent);
 }
 
 .index-identity {
@@ -241,7 +281,7 @@
 }
 
 .index-row:hover .index-name {
-  color: var(--accent);
+  color: var(--hue);
 }
 
 .index-kind {
@@ -260,7 +300,8 @@
 }
 
 .index-metric-value {
-  color: var(--ink);
+  /* the number the evidence stands behind, in the colour of whoever checked */
+  color: var(--hue);
   font-weight: 700;
 }
 
@@ -303,7 +344,7 @@
 }
 
 .index-row:hover .index-arrow {
-  color: var(--accent);
+  color: var(--hue);
   transform: translateX(0.3rem);
 }
 
@@ -507,9 +548,25 @@
   margin-top: 1.5rem;
 }
 
+.case {
+  --hue: var(--accent);
+}
+
+.case[data-source="machine"] {
+  --hue: var(--evidence-machine);
+}
+
+.case[data-source="person"] {
+  --hue: var(--evidence-person);
+}
+
+.case[data-source="world"] {
+  --hue: var(--evidence-world);
+}
+
 .case-note {
   margin-top: 2.25rem;
-  border-left: 2px solid var(--accent);
+  border-left: 2px solid var(--hue);
   padding: 0.85rem 0 0.85rem 1.1rem;
   max-width: 58ch;
 }

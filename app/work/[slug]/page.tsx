@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { EvidenceChip } from "@/components/EvidenceChip";
+import { EvidenceChip, evidenceSource } from "@/components/EvidenceChip";
 import { ExtractionSpecimen } from "@/components/ExtractionSpecimen";
 import { projects, projectBySlug } from "@/content/projects";
 
@@ -37,7 +37,7 @@ export default async function WorkPage({
   const next = projects[(position + 1) % projects.length]!;
 
   return (
-    <article className="case">
+    <article className="case" data-source={evidenceSource(project.evidence.mark)}>
       <header className="case-head">
         <div className="shell">
           <Link href="/#work" className="case-back mono-meta link-quiet">

@@ -184,11 +184,12 @@ a {
 }
 
 /* ============================================================
-   Grade chip — the site's structural device.
-   Borrowed from the confidence table Cezar keeps in his own repos.
+   Evidence chip — the site's structural device.
+   The hue says who did the checking: a machine, a person, the world.
    ============================================================ */
 
 .grade {
+  --hue: var(--ink-muted);
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -197,24 +198,28 @@ a {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-muted);
-  border: 1px solid var(--rule);
+  border: 1px solid color-mix(in srgb, var(--hue) 45%, transparent);
+  background: color-mix(in srgb, var(--hue) 9%, transparent);
   padding: 0.16rem 0.45rem;
   white-space: nowrap;
   border-radius: 2px;
 }
 
+.grade[data-source="machine"] {
+  --hue: var(--evidence-machine);
+}
+
+.grade[data-source="person"] {
+  --hue: var(--evidence-person);
+}
+
+.grade[data-source="world"] {
+  --hue: var(--evidence-world);
+}
+
 .grade-mark {
   font-weight: 700;
-  color: var(--ink);
-}
-
-.grade[data-grade="A"] {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.grade[data-grade="A"] .grade-mark {
-  color: var(--accent);
+  color: var(--hue);
 }
 
 /* ============================================================

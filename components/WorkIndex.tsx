@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { projects } from "@/content/projects";
-import { EvidenceChip } from "./EvidenceChip";
+import { EvidenceChip, evidenceSource } from "./EvidenceChip";
 
 /**
  * The index doubles as navigation and as the argument: every system on one
@@ -12,7 +12,11 @@ export function WorkIndex() {
     <ol className="index-list">
       {projects.map((project) => (
         <li key={project.slug}>
-          <Link href={`/work/${project.slug}`} className="index-row">
+          <Link
+            href={`/work/${project.slug}`}
+            className="index-row"
+            data-source={evidenceSource(project.evidence.mark)}
+          >
             <span className="index-identity">
               <span className="display-sub index-name">{project.name}</span>
               <span className="mono-meta index-kind">

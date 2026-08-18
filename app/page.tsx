@@ -31,7 +31,10 @@ export default function Home() {
       <section className="hero">
         <div className="shell">
           <p className="hero-eyebrow mono-meta rise">
-            {site.role} · {site.location} · open to internships and junior roles
+            {site.role} · {site.location} ·{" "}
+            <span className="hero-open">
+              open to internships and junior roles
+            </span>
           </p>
           <h1 className="display-hero hero-name rise">{site.name}</h1>
           <p className="hero-thesis rise">{site.thesis}</p>
@@ -76,13 +79,13 @@ export default function Home() {
             Five systems, and what pins each one
           </h2>
           <p className="prose-col work-head-note">
-            Every entry carries the kind of confidence that stands behind it:{" "}
-            <strong>proven</strong> when automated tests assert the behaviour,{" "}
-            <strong>validated</strong> when the result survived an out-of-sample
-            test built to break it, <strong>in use</strong> when real people
-            depend on it daily, <strong>merged</strong> when someone else
-            reviewed and accepted it, <strong>shipped</strong> when it is out
-            there and judged by use.
+            Each entry says what stands behind it, and the colour says who did
+            the checking. <strong>Proven</strong> and <strong>validated</strong>{" "}
+            mean a machine did — a test suite that fails when the behaviour
+            breaks, or an out-of-sample run built to kill the result.{" "}
+            <strong>Merged</strong> means a person did: a maintainer reviewed
+            the work and took it. <strong>In use</strong> and{" "}
+            <strong>shipped</strong> mean the world did.
           </p>
         </div>
         <WorkIndex />

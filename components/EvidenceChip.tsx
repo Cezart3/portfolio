@@ -1,9 +1,23 @@
 import type { Evidence } from "@/content/projects";
 
+export type EvidenceSource = "machine" | "person" | "world";
+
 /**
- * The chip pairs a kind of confidence with the artefact that pins it.
- * `strong` marks the cases where automated tests assert the claim.
+ * Who did the checking. The chip's colour follows this, so the palette
+ * carries information rather than decoration.
  */
+export function evidenceSource(mark: string): EvidenceSource {
+  switch (mark.toLowerCase()) {
+    case "proven":
+    case "validated":
+      return "machine";
+    case "merged":
+      return "person";
+    default:
+      return "world";
+  }
+}
+
 export function EvidenceChip({
   evidence,
   showDetail = true,
@@ -12,7 +26,7 @@ export function EvidenceChip({
   showDetail?: boolean;
 }) {
   return (
-    <span className="grade" data-grade={evidence.strong ? "A" : undefined}>
+    <span className="grade" data-source={evidenceSource(evidence.mark)}>
       <span className="grade-mark">{evidence.mark}</span>
       {showDetail ? (
         <>

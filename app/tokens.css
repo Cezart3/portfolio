@@ -1,20 +1,27 @@
 /* ============================================================
-   Tokens
-   Palette: cool sage-gray paper, near-black ink, one cobalt accent.
+   Tokens — one committed dark palette, no light variant.
+
+   The ground is a near-black with a blue cast, so the accents sit
+   on it without turning muddy. Colour is never decorative here: the
+   three hues encode where a claim's confidence comes from — a
+   machine checked it, a person checked it, or the world did.
    ============================================================ */
 
 @theme {
-  --color-paper: #e8e9e3;
-  --color-paper-sunk: #dfe1d9;
-  --color-paper-deep: #dcded6;
-  --color-paper-raised: #f1f2ee;
-  --color-ink: #14171a;
-  --color-ink-muted: #5a625e;
-  --color-ink-faint: #8b918b;
-  --color-rule: #c7cbc1;
-  --color-rule-strong: #a9aea3;
-  --color-accent: #1d3fd6;
-  --color-accent-ink: #ffffff;
+  --color-paper: #0e1116;
+  --color-paper-deep: #12161c;
+  --color-paper-raised: #161b22;
+  --color-paper-sunk: #0a0d11;
+  --color-ink: #e7e9e4;
+  --color-ink-muted: #98a1ab;
+  --color-ink-faint: #7b8490;
+  --color-rule: #232a33;
+  --color-rule-strong: #384250;
+  --color-accent: #8aa2ff;
+  --color-accent-ink: #0a0d11;
+  --color-evidence-machine: #8aa2ff;
+  --color-evidence-person: #bd8dff;
+  --color-evidence-world: #e0b04a;
 
   --font-display: var(--font-archivo), "Archivo", "Helvetica Neue", Arial,
     sans-serif;
@@ -27,57 +34,33 @@
 }
 
 :root {
-  --paper: #e8e9e3;
-  --paper-sunk: #dfe1d9;
-  --paper-deep: #dcded6;
-  --paper-raised: #f1f2ee;
-  --ink: #14171a;
-  --ink-muted: #5a625e;
-  --ink-faint: #8b918b;
-  --rule: #c7cbc1;
-  --rule-strong: #a9aea3;
-  --accent: #1d3fd6;
-  --accent-ink: #ffffff;
-  --accent-wash: rgba(29, 63, 214, 0.08);
-  --shadow-lift: 0 1px 0 rgba(20, 23, 26, 0.06);
+  --paper: #0e1116;
+  --paper-deep: #12161c;
+  --paper-raised: #161b22;
+  --paper-sunk: #0a0d11;
 
-  color-scheme: light;
-}
+  --ink: #e7e9e4;
+  --ink-muted: #98a1ab;
+  --ink-faint: #7b8490;
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #101317;
-    --paper-sunk: #0b0d10;
-    --paper-deep: #161a20;
-    --paper-raised: #171b20;
-    --ink: #e4e6e0;
-    --ink-muted: #939b95;
-    --ink-faint: #6b736d;
-    --rule: #272c32;
-    --rule-strong: #3a4149;
-    --accent: #8ba3ff;
-    --accent-ink: #0b0d10;
-    --accent-wash: rgba(139, 163, 255, 0.12);
-    --shadow-lift: 0 1px 0 rgba(0, 0, 0, 0.4);
+  --rule: #232a33;
+  --rule-strong: #384250;
 
-    color-scheme: dark;
-  }
-}
+  /* the standing accent: links, the strike, focus rings */
+  --accent: #8aa2ff;
+  --accent-ink: #0a0d11;
+  --accent-wash: rgba(138, 162, 255, 0.1);
 
-:root[data-theme="dark"] {
-  --paper: #101317;
-  --paper-sunk: #0b0d10;
-  --paper-deep: #161a20;
-  --paper-raised: #171b20;
-  --ink: #e4e6e0;
-  --ink-muted: #939b95;
-  --ink-faint: #6b736d;
-  --rule: #272c32;
-  --rule-strong: #3a4149;
-  --accent: #8ba3ff;
-  --accent-ink: #0b0d10;
-  --accent-wash: rgba(139, 163, 255, 0.12);
-  --shadow-lift: 0 1px 0 rgba(0, 0, 0, 0.4);
+  /* where a claim's confidence comes from */
+  --evidence-machine: #8aa2ff;
+  --evidence-person: #bd8dff;
+  --evidence-world: #e0b04a;
+
+  /* a row borrows its own evidence hue on hover */
+  --row-hue: var(--accent);
+  --row-wash: rgba(138, 162, 255, 0.07);
+
+  --shadow-lift: 0 1px 0 rgba(0, 0, 0, 0.5);
 
   color-scheme: dark;
 }
