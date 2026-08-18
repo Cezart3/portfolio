@@ -114,10 +114,17 @@ export default function Home() {
 
       <Section id="stack" label="Stack">
         <h2 className="display-section">What I reach for</h2>
+        <p className="stack-lede prose-col">
+          Graded the same way the projects are, because a list that claims
+          everything claims nothing.
+        </p>
         <dl className="stack-grid">
           {stack.map((group) => (
             <div key={group.group} className="stack-group">
-              <dt className="mono-meta stack-group-name">{group.group}</dt>
+              <dt className="stack-group-head">
+                <span className="mono-meta stack-group-name">{group.group}</span>
+                <span className="stack-group-note">{group.note}</span>
+              </dt>
               <dd className="stack-group-items">
                 <ul className="tag-row">
                   {group.items.map((item) => (

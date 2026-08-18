@@ -210,6 +210,14 @@ export const projects: Project[] = [
         ],
       },
       {
+        title: "How this was actually built",
+        body: [
+          "Most of the Kotlin here was written by coding agents, working from what Radu and I had agreed an arc should do. I am not going to turn that into a claim of fluency in Kotlin Multiplatform, because it is not one.",
+          "What I did was decide what got built, set the agents up to build it, and then stand between their output and the branch: reading every diff, writing the tests that had to pass before anything merged, running the audit that turned up the security findings below, and keeping the document that grades which parts are proven and which have never run anywhere.",
+          "That document exists because of how the code was written, not in spite of it. When you did not type something line by line, the only defensible position is to be explicit about what has been checked and what has not.",
+        ],
+      },
+      {
         title: "Where it started",
         body: [
           "The app began as an AI Studio export: one Android module, screens and logic in the same files, network calls written by hand against Gemini. It worked, and it could not be extended. The job I took on was giving it an architecture.",
