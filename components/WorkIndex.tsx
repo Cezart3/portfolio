@@ -4,18 +4,15 @@ import { EvidenceChip } from "./EvidenceChip";
 
 /**
  * The index doubles as navigation and as the argument: every system on one
- * screen, each with the one number worth knowing and the evidence behind it.
+ * screen, each with the one number worth knowing and the artefact that stands
+ * behind it.
  */
 export function WorkIndex() {
   return (
     <ol className="index-list">
-      {projects.map((project, i) => (
+      {projects.map((project) => (
         <li key={project.slug}>
-          <Link
-            href={`/work/${project.slug}`}
-            className="index-row"
-            style={{ "--row-delay": `${0.05 * i}s` } as React.CSSProperties}
-          >
+          <Link href={`/work/${project.slug}`} className="index-row">
             <span className="index-identity">
               <span className="display-sub index-name">{project.name}</span>
               <span className="mono-meta index-kind">
@@ -37,9 +34,14 @@ export function WorkIndex() {
             </span>
 
             <span className="index-aside">
-              <EvidenceChip evidence={project.evidence} showDetail={false} />
-              <span className="index-arrow" aria-hidden="true">
-                &#8594;
+              <span className="index-aside-top">
+                <EvidenceChip evidence={project.evidence} showDetail={false} />
+                <span className="index-arrow" aria-hidden="true">
+                  &#8594;
+                </span>
+              </span>
+              <span className="index-evidence mono-meta">
+                {project.evidence.detail}
               </span>
             </span>
           </Link>

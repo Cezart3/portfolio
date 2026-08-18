@@ -1,0 +1,106 @@
+/* ============================================================
+   "What I threw out" — the page's one loud moment.
+   Loud in type, not in colour: the palette stays as disciplined
+   as everywhere else and the volume comes from scale.
+   ============================================================ */
+
+.discard-lede {
+  margin: 1rem 0 0;
+  color: var(--ink-muted);
+  max-width: 44ch;
+}
+
+.discard-list {
+  list-style: none;
+  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.discard-item {
+  padding-block: clamp(2rem, 4vw, 2.75rem);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.discard-item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+@media (min-width: 60rem) {
+  .discard-item {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 3.5rem;
+    align-items: start;
+  }
+}
+
+.discard-mark {
+  font-family: var(--font-display);
+  font-weight: 660;
+  font-stretch: 120%;
+  font-size: clamp(1.9rem, 5.2vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin: 0;
+  color: var(--ink);
+}
+
+/* The rule through the discarded thing. Static by default; where the browser
+   supports scroll-driven animation it draws itself as the item comes up. */
+.discard-strike {
+  position: relative;
+  display: inline;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 58%;
+  background-size: 100% 3px;
+}
+
+@supports (animation-timeline: view()) {
+  .discard-strike {
+    background-size: 0% 3px;
+    animation: strike-through linear both;
+    animation-timeline: view();
+    animation-range: entry 45% cover 42%;
+  }
+}
+
+@keyframes strike-through {
+  to {
+    background-size: 100% 3px;
+  }
+}
+
+.discard-source {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 0.9rem;
+}
+
+.discard-body {
+  margin: 0;
+  color: var(--ink-muted);
+  max-width: 46ch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .discard-strike {
+    animation: none;
+    background-size: 100% 3px;
+  }
+}
+
+@media (max-width: 40rem) {
+  .discard-mark {
+    line-height: 1.1;
+  }
+}

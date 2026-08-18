@@ -3,7 +3,7 @@ import { site } from "@/content/site";
 
 const nav = [
   { label: "Work", href: "/#work" },
-  { label: "Approach", href: "/#approach" },
+  { label: "Judgement", href: "/#judgement" },
   { label: "Stack", href: "/#stack" },
   { label: "About", href: "/#about" },
 ];

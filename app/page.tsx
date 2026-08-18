@@ -2,25 +2,26 @@ import { Section } from "@/components/Section";
 import { WorkIndex } from "@/components/WorkIndex";
 import { site, stack } from "@/content/site";
 
-const approach = [
+/**
+ * Three decisions where the better-looking option lost. Each one is documented
+ * in the repository it came from — this section exists because what someone
+ * rejected says more than what they shipped.
+ */
+const discarded = [
   {
+    strike: "A 63% win rate",
     source: "TradingBot",
-    claim: "A number that looks good is a hypothesis, not a result.",
-    instance:
-      "A variant of the trading filter produced a 63% win rate, far prettier than the one that shipped. Its bootstrapped confidence interval for expectancy included zero and one walk-forward fold went negative, so it was rejected in favour of the configuration with the worse-looking number and the edge that held in every fold.",
+    body: "A one-to-one variant of the trade filter beat the shipped configuration on the number everyone looks at first. Its bootstrapped confidence interval for expectancy included zero, and one walk-forward fold came out negative. The two-to-one setup, with the worse win rate, held its edge in every fold. The prettier number lost.",
   },
   {
-    source: "Unlost in Translation",
-    claim: "Say out loud which parts have never been run.",
-    instance:
-      "The translation app carries a document grading every component by how much evidence stands behind it. It states plainly that the camera hand-off, the text-to-speech layer, the watch service and most browser APIs have never executed anywhere. Knowing where the untested edges are is what makes the tested middle worth anything.",
-  },
-  {
+    strike: "A model for the hard part",
     source: "Kira",
-    claim:
-      "The half that never gets demonstrated is the half that has to be right.",
-    instance:
-      "Per-IP rate limiting, an SSRF-safe image proxy, and phone numbers stripped out of ad text before storage. An API key that used to travel in a URL and got printed on screen by a timeout, moved into a header with two tests standing over it. None of this shows up in a screenshot.",
+    body: "Reading heating and parking out of messy Romanian ad text is the part of the rental aggregator worth training a model on. It runs on regex instead: auditable when a listing comes out wrong, free per listing, and it works offline. The more impressive choice was the worse one.",
+  },
+  {
+    strike: "Generated serializers",
+    source: "Unlost in Translation",
+    body: "The compiler plugin that writes serialization code for you would not cooperate with Compose Multiplatform on WebAssembly. Writing those serializers by hand was the dull way through, and it was what unblocked the browser build entirely.",
   },
 ];
 
@@ -69,7 +70,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Section id="work" label="Selected work">
+      <Section id="work" label="Selected work" tone="deep">
         <div className="work-head">
           <h2 className="display-section">
             Five systems, and what pins each one
@@ -87,22 +88,22 @@ export default function Home() {
         <WorkIndex />
       </Section>
 
-      <Section id="approach" label="How I work">
-        <h2 className="display-section">
-          Three habits, and where each one came from
-        </h2>
-        <ol className="approach-list">
-          {approach.map((item) => (
-            <li key={item.claim} className="approach-item">
-              <span className="approach-source mono-meta">
-                learned on
-                <br />
-                <strong>{item.source}</strong>
-              </span>
+      <Section id="judgement" label="Judgement">
+        <h2 className="display-section">What I threw out</h2>
+        <p className="discard-lede prose-col">
+          The decisions I would want to be asked about.
+        </p>
+
+        <ol className="discard-list">
+          {discarded.map((item) => (
+            <li key={item.strike} className="discard-item">
               <div>
-                <h3 className="approach-claim display-sub">{item.claim}</h3>
-                <p className="approach-instance prose-col">{item.instance}</p>
+                <h3 className="discard-mark">
+                  <span className="discard-strike">{item.strike}</span>
+                </h3>
+                <span className="discard-source">{item.source}</span>
               </div>
+              <p className="discard-body">{item.body}</p>
             </li>
           ))}
         </ol>
@@ -168,7 +169,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section id="contact" label="Contact">
+      <Section id="contact" label="Contact" tone="deep">
         <h2 className="display-section contact-head">
           Looking for a backend or ML internship, and reading every message.
         </h2>

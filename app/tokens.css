@@ -6,6 +6,7 @@
 @theme {
   --color-paper: #e8e9e3;
   --color-paper-sunk: #dfe1d9;
+  --color-paper-deep: #dcded6;
   --color-paper-raised: #f1f2ee;
   --color-ink: #14171a;
   --color-ink-muted: #5a625e;
@@ -28,6 +29,7 @@
 :root {
   --paper: #e8e9e3;
   --paper-sunk: #dfe1d9;
+  --paper-deep: #dcded6;
   --paper-raised: #f1f2ee;
   --ink: #14171a;
   --ink-muted: #5a625e;
@@ -46,6 +48,7 @@
   :root:not([data-theme="light"]) {
     --paper: #101317;
     --paper-sunk: #0b0d10;
+    --paper-deep: #161a20;
     --paper-raised: #171b20;
     --ink: #e4e6e0;
     --ink-muted: #939b95;
@@ -64,6 +67,7 @@
 :root[data-theme="dark"] {
   --paper: #101317;
   --paper-sunk: #0b0d10;
+  --paper-deep: #161a20;
   --paper-raised: #171b20;
   --ink: #e4e6e0;
   --ink-muted: #939b95;
