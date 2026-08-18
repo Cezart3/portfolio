@@ -72,7 +72,7 @@ export const projects: Project[] = [
       "pytest",
     ],
     links: [
-      { label: "Live demo — invented listings", href: "https://kira-demo.vercel.app" },
+      { label: "Live demo — invented listings", href: "https://kira-imobiliare.vercel.app" },
       { label: "Repository", href: "https://github.com/Cezart3/KiraImobiliare" },
       {
         label: "Setup guide (Romanian)",
