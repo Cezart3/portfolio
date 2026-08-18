@@ -72,6 +72,7 @@ export const projects: Project[] = [
       "pytest",
     ],
     links: [
+      { label: "Live demo — invented listings", href: "https://kira-demo.vercel.app" },
       { label: "Repository", href: "https://github.com/Cezart3/KiraImobiliare" },
       {
         label: "Setup guide (Romanian)",
@@ -136,6 +137,14 @@ export const projects: Project[] = [
         body: [
           "Kira is source-available under a personal-use licence: clone it, run it, change it, tell a friend. What the licence does not allow is hosting it publicly or selling it, and that restriction is mine, written on purpose.",
           "The listings belong to the sites they came from, and their terms of service forbid aggregating and republishing them. One person running the tool for themselves is private use. A public instance serving everyone is a different thing legally, and pretending otherwise would be the kind of shortcut this project is not for.",
+        ],
+      },
+      {
+        title: "The demo, and what it is careful about",
+        body: [
+          "So that the interface can be looked at without installing anything, there is a demo — and everything in it is invented. A generator composes Romanian ad text from templates and runs that text through the app's own extractors and matching service, which means the demo exercises the real pipeline: the same routes, the same queries, the same heating and parking classifiers, the same parking-proximity matching. Only the ads underneath are made up, and a banner says so on every screen.",
+          "Two routes are closed in demo mode, because they are the only ones that can reach a third party. Scraping returns 403, so a public instance can never pull from a listing site. The image proxy returns 404, because an image proxy on a public host is an open door and the invented listings have no photos anyway. Geocoding is answered from a bundled table of well-known places rather than from Nominatim — a public instance should not send a shared community service whatever strangers type into a search box.",
+          "For real listings, the answer is still to run it locally. That is what the tool is for.",
         ],
       },
     ],
