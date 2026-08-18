@@ -1,0 +1,7 @@
+/* Cascade order matters: tokens, then base, then the page chrome that
+   overrides it. Keep these imports in this order. */
+@import "tailwindcss";
+@import "./tokens.css";
+@import "./base.css";
+@import "./chrome.css";
+@import "./specimen.css";

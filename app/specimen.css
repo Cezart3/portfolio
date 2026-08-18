@@ -1,0 +1,118 @@
+/* ============================================================
+   Hero specimen — the page's signature element.
+   ============================================================ */
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.5rem, 6vw, 3.5rem);
+}
+
+@media (min-width: 64rem) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) 23rem;
+    gap: 4.5rem;
+    align-items: end;
+  }
+}
+
+.specimen {
+  margin: 0;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--paper-raised);
+  padding: 1.1rem 1.15rem 1.25rem;
+  animation: rise 0.7s cubic-bezier(0.16, 0.84, 0.44, 1) both;
+  animation-delay: 0.36s;
+}
+
+.specimen-cap {
+  color: var(--ink-faint);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 0.9rem;
+}
+
+.specimen-source {
+  margin: 0 0 1.1rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+
+.specimen-source mark {
+  background: transparent;
+  color: var(--ink);
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  padding-bottom: 1px;
+  animation: draw-underline 0.5s ease both;
+}
+
+.specimen-source mark:nth-of-type(1) {
+  animation-delay: 0.5s;
+}
+.specimen-source mark:nth-of-type(2) {
+  animation-delay: 0.62s;
+}
+.specimen-source mark:nth-of-type(3) {
+  animation-delay: 0.74s;
+}
+.specimen-source mark:nth-of-type(4) {
+  animation-delay: 0.86s;
+}
+.specimen-source mark:nth-of-type(5) {
+  animation-delay: 0.98s;
+}
+
+@keyframes draw-underline {
+  from {
+    background-size: 0% 1px;
+  }
+  to {
+    background-size: 100% 1px;
+  }
+}
+
+.specimen-record {
+  margin: 0;
+  border-top: 1px solid var(--rule);
+  padding-top: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+}
+
+.specimen-row {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  animation: rise 0.5s cubic-bezier(0.16, 0.84, 0.44, 1) both;
+  animation-delay: var(--row-delay, 0s);
+}
+
+.specimen-row dt {
+  color: var(--ink-faint);
+}
+
+.specimen-row dd {
+  margin: 0;
+  color: var(--ink);
+}
+
+.specimen-derived {
+  color: var(--ink-faint);
+  font-size: 0.6875rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .specimen-source mark {
+    background-size: 100% 1px;
+  }
+}

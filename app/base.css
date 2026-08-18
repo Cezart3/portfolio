@@ -1,0 +1,272 @@
+/* ============================================================
+   Base
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* ============================================================
+   Layout primitives
+   ============================================================ */
+
+.shell {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 3.5rem);
+}
+
+/* The datasheet grid: a narrow metadata rail, then the content column. */
+.rail {
+  display: grid;
+  gap: 0.75rem 2.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 60rem) {
+  .rail {
+    grid-template-columns: 11.5rem minmax(0, 1fr);
+    gap: 0 3.5rem;
+  }
+}
+
+.rail-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  line-height: 1.5;
+}
+
+.section-band {
+  border-top: 1px solid var(--rule);
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+
+/* ============================================================
+   Type
+   ============================================================ */
+
+.display-hero {
+  font-family: var(--font-display);
+  font-weight: 620;
+  font-stretch: 112%;
+  font-size: clamp(2.55rem, 7.4vw, 5.75rem);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.display-section {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-stretch: 108%;
+  font-size: clamp(1.75rem, 3.4vw, 2.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.display-sub {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-stretch: 104%;
+  font-size: 1.2rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.lede {
+  font-size: clamp(1.125rem, 1.7vw, 1.3125rem);
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: 46ch;
+  margin: 0;
+}
+
+.prose-col {
+  max-width: 64ch;
+}
+
+.prose-col p {
+  margin: 0 0 1.1em;
+}
+
+.prose-col p:last-child {
+  margin-bottom: 0;
+}
+
+.prose-col strong {
+  font-weight: 600;
+}
+
+.prose-col code {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  background: var(--accent-wash);
+  padding: 0.1em 0.34em;
+  border-radius: 2px;
+}
+
+.mono-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   Links
+   ============================================================ */
+
+.link-underline {
+  text-decoration: none;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  padding-bottom: 1px;
+  transition: background-size 0.18s ease, color 0.18s ease;
+}
+
+.link-underline:hover {
+  color: var(--accent);
+  background-size: 100% 2px;
+}
+
+.link-quiet {
+  text-decoration: none;
+  color: var(--ink-muted);
+  transition: color 0.15s ease;
+}
+
+.link-quiet:hover {
+  color: var(--accent);
+}
+
+/* ============================================================
+   Grade chip — the site's structural device.
+   Borrowed from the confidence table Cezar keeps in his own repos.
+   ============================================================ */
+
+.grade {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  border: 1px solid var(--rule);
+  padding: 0.16rem 0.45rem;
+  white-space: nowrap;
+  border-radius: 2px;
+}
+
+.grade-mark {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.grade[data-grade="A"] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.grade[data-grade="A"] .grade-mark {
+  color: var(--accent);
+}
+
+/* ============================================================
+   Utility chips
+   ============================================================ */
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.03em;
+  color: var(--ink-muted);
+  border: 1px solid var(--rule);
+  padding: 0.14rem 0.42rem;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   Motion
+   ============================================================ */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.6rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.7s cubic-bezier(0.16, 0.84, 0.44, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

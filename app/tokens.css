@@ -1,0 +1,79 @@
+/* ============================================================
+   Tokens
+   Palette: cool sage-gray paper, near-black ink, one cobalt accent.
+   ============================================================ */
+
+@theme {
+  --color-paper: #e8e9e3;
+  --color-paper-sunk: #dfe1d9;
+  --color-paper-raised: #f1f2ee;
+  --color-ink: #14171a;
+  --color-ink-muted: #5a625e;
+  --color-ink-faint: #8b918b;
+  --color-rule: #c7cbc1;
+  --color-rule-strong: #a9aea3;
+  --color-accent: #1d3fd6;
+  --color-accent-ink: #ffffff;
+
+  --font-display: var(--font-archivo), "Archivo", "Helvetica Neue", Arial,
+    sans-serif;
+  --font-body: var(--font-newsreader), "Newsreader", Georgia, "Times New Roman",
+    serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace,
+    SFMono-Regular, Menlo, monospace;
+
+  --breakpoint-xs: 30rem;
+}
+
+:root {
+  --paper: #e8e9e3;
+  --paper-sunk: #dfe1d9;
+  --paper-raised: #f1f2ee;
+  --ink: #14171a;
+  --ink-muted: #5a625e;
+  --ink-faint: #8b918b;
+  --rule: #c7cbc1;
+  --rule-strong: #a9aea3;
+  --accent: #1d3fd6;
+  --accent-ink: #ffffff;
+  --accent-wash: rgba(29, 63, 214, 0.08);
+  --shadow-lift: 0 1px 0 rgba(20, 23, 26, 0.06);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #101317;
+    --paper-sunk: #0b0d10;
+    --paper-raised: #171b20;
+    --ink: #e4e6e0;
+    --ink-muted: #939b95;
+    --ink-faint: #6b736d;
+    --rule: #272c32;
+    --rule-strong: #3a4149;
+    --accent: #8ba3ff;
+    --accent-ink: #0b0d10;
+    --accent-wash: rgba(139, 163, 255, 0.12);
+    --shadow-lift: 0 1px 0 rgba(0, 0, 0, 0.4);
+
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #101317;
+  --paper-sunk: #0b0d10;
+  --paper-raised: #171b20;
+  --ink: #e4e6e0;
+  --ink-muted: #939b95;
+  --ink-faint: #6b736d;
+  --rule: #272c32;
+  --rule-strong: #3a4149;
+  --accent: #8ba3ff;
+  --accent-ink: #0b0d10;
+  --accent-wash: rgba(139, 163, 255, 0.12);
+  --shadow-lift: 0 1px 0 rgba(0, 0, 0, 0.4);
+
+  color-scheme: dark;
+}
