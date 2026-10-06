@@ -28,8 +28,17 @@ npm run typecheck
 app/          routes, and the CSS layers (tokens -> base -> chrome -> specimen)
 components/   header, footer, work index, evidence chip, hero specimen
 content/      the site's data: profile, stack, projects and their case studies
-public/       CV
+public/       CV, as served
+cv/           CV source: edit cv.html, then print it to public/ (below)
 ```
 
 Content lives in `content/`, typed. Adding a project means adding one object to
 `content/projects.ts`; the index row and its case-study page are generated from it.
+
+## CV
+
+`public/cezar-tocaciu-cv.pdf` is printed from `cv/cv.html` with headless Edge:
+
+```bash
+msedge --headless=new --no-pdf-header-footer   --print-to-pdf=public/cezar-tocaciu-cv.pdf "file:///$PWD/cv/cv.html"
+```

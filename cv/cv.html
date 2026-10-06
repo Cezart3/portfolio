@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cezar Tocaciu — CV</title>
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --ink: #1f2328;
+    --muted: #57606a;
+    --accent: #23408e;
+    --rule: #c5cfe6;
+    --side: #f2f5fb;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: Calibri, Carlito, "Segoe UI", sans-serif;
+    font-size: 9.6pt;
+    line-height: 1.27;
+    color: var(--ink);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page { width: 210mm; height: 297mm; padding: 11mm 13mm 8mm; overflow: hidden; }
+  a { color: var(--accent); text-decoration: none; }
+
+  header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 1.5px solid var(--accent); padding-bottom: 2.5mm;
+  }
+  h1 { font-size: 25pt; margin: 0; line-height: 1; letter-spacing: -0.2pt; }
+  .role { color: var(--accent); font-size: 12pt; margin-top: 1.5mm; }
+  .head-links { text-align: right; font-size: 9.5pt; line-height: 1.45; }
+  .head-links .site { font-size: 11pt; font-weight: bold; }
+
+  .cols { display: grid; grid-template-columns: 55mm 1fr; gap: 7mm; margin-top: 4mm; }
+  aside { background: var(--side); padding: 4mm 4mm 5mm; font-size: 9.5pt; }
+  h2 {
+    font-size: 11pt; color: var(--accent); text-transform: uppercase;
+    margin: 0 0 1.8mm; padding-bottom: 1mm; border-bottom: 1px solid var(--rule);
+    letter-spacing: 0.2pt;
+  }
+  main h2 { border-bottom: 1.5px solid var(--accent); }
+  section { margin-bottom: 3.2mm; }
+  aside p { margin: 0 0 0.6mm; }
+  .grp { margin-bottom: 1.6mm; }
+  .grp b { display: block; }
+  .grp span { color: var(--muted); }
+
+  .profile { margin: 0; }
+  .edu { display: flex; justify-content: space-between; }
+  .edu-sub { color: var(--muted); font-style: italic; }
+
+  .proj { margin-bottom: 2.1mm; }
+  .proj-head { display: flex; justify-content: space-between; gap: 3mm; }
+  .proj-name { font-weight: bold; font-size: 10.5pt; }
+  .proj-meta { color: var(--muted); font-size: 9pt; white-space: nowrap; }
+  .stack { color: var(--muted); font-style: italic; font-size: 9pt; margin: 0.2mm 0 0.6mm; }
+  ul { margin: 0; padding-left: 4.2mm; }
+  li { margin-bottom: 0.3mm; }
+  li::marker { color: var(--accent); }
+  a.demo { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div>
+      <h1>Cezar Tocaciu</h1>
+      <div class="role">Software Engineer · Backend &amp; Python</div>
+    </div>
+    <div class="head-links">
+      <a class="site" href="https://cezart3.vercel.app">cezart3.vercel.app</a><br>
+      <a href="https://github.com/Cezart3">github.com/Cezart3</a>
+    </div>
+  </header>
+
+  <div class="cols">
+    <aside>
+      <section>
+        <h2>Contact</h2>
+        <p>+40 773 781 855</p>
+        <p><a href="mailto:cezartocaciu233@gmail.com">cezartocaciu233@gmail.com</a></p>
+        <p>Cluj-Napoca, Romania</p>
+        <p>Portfolio: <a href="https://cezart3.vercel.app">cezart3.vercel.app</a></p>
+        <p>GitHub: <a href="https://github.com/Cezart3">Cezart3</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/tocaciu-cezar-0865373b6/">tocaciu-cezar</a></p>
+      </section>
+
+      <section>
+        <h2>Skills</h2>
+        <div class="grp"><b>Languages</b><span>Python, Java, TypeScript, SQL, C++</span></div>
+        <div class="grp"><b>Backend</b><span>FastAPI, SQLAlchemy, REST APIs, web scraping, regex</span></div>
+        <div class="grp"><b>Testing</b><span>pytest, Vitest</span></div>
+        <div class="grp"><b>Databases</b><span>MySQL, SQLite</span></div>
+        <div class="grp"><b>Frontend &amp; desktop</b><span>React, Tailwind, Java Swing</span></div>
+        <div class="grp"><b>Data &amp; ML</b><span>pandas, NumPy, scikit-learn, XGBoost</span></div>
+        <div class="grp"><b>Tools</b><span>Git, GitHub, Claude Code (agents, skills, hooks)</span></div>
+        <div class="grp"><b>Learning on real projects</b><span>Kotlin Multiplatform, Unity, C#</span></div>
+      </section>
+
+      <section>
+        <h2>Languages</h2>
+        <p>Romanian — Native</p>
+        <p>English — Fluent</p>
+      </section>
+
+      <section>
+        <h2>Details</h2>
+        <p>Born 31 August 2004</p>
+        <p>Nationality: Romanian</p>
+      </section>
+    </aside>
+
+    <main>
+      <section>
+        <h2>Profile</h2>
+        <p class="profile">
+          Fourth-year Computer Science student at UTCN, looking for a software
+          engineering internship. I like finishing things: a rental aggregator
+          with a public demo, a Chrome extension with 400+ tests, desktop
+          software a manufacturer uses every day, and open-source work merged
+          by its maintainer. I build a lot of it with AI coding
+          agents, and I treat their output the way a reviewer would: I read the
+          diffs, gate merges on tests, and write down what has not been checked.
+        </p>
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        <div class="edu"><b>Technical University of Cluj-Napoca (UTCN)</b><span class="proj-meta">Oct 2023 – Present</span></div>
+        <div class="edu-sub">BSc Computer Science · fourth year</div>
+      </section>
+
+      <section>
+        <h2>Projects</h2>
+
+        <div class="proj">
+          <div class="proj-head"><span class="proj-name">Kira — Rental Aggregator for Romania</span><a class="proj-meta demo" href="https://kira-imobiliare.vercel.app">kira-imobiliare.vercel.app</a></div>
+          <div class="stack">Python · FastAPI · SQLAlchemy · SQLite · React · TypeScript · pytest</div>
+          <ul>
+            <li>Collects listings from 5 property sites and adds filters none of them offer: heating type, parking, walking time to your faculty.</li>
+            <li>Rule-based parser for free-form Romanian ad text; FastAPI backend with ~70 tests, rate limiting and an SSRF-safe image proxy.</li>
+          </ul>
+        </div>
+
+        <div class="proj">
+          <div class="proj-head"><span class="proj-name">Escape With Your Friends — Online Co-op Game</span><span class="proj-meta">in progress · Steam planned</span></div>
+          <div class="stack">Unity · C# · FishNet · Steamworks · Claude Code</div>
+          <ul>
+            <li>Four-player game networked peer-to-peer over Steam with no servers; the host decides damage, money and every random roll, so clients cannot cheat.</li>
+            <li>Ran it like a small team with AI agents writing the code: 185 tracked issues, 136 merged pull requests in five weeks, ~70 automated headless tests, performance measured on low-end hardware.</li>
+          </ul>
+        </div>
+
+        <div class="proj">
+          <div class="proj-head"><span class="proj-name">RankUp — Chrome Extension</span><span class="proj-meta">public on GitHub</span></div>
+          <div class="stack">TypeScript · React · WebAssembly · Web Workers · Vitest</div>
+          <ul>
+            <li>Analyses opponents' recorded CS2 matches in the browser (Rust parser compiled to WebAssembly, run on a worker pool) and maps where each player usually stands. No backend.</li>
+            <li>400+ tests; paid features are locked behind a type that only one function can open, so forgetting a check is a compile error.</li>
+          </ul>
+        </div>
+
+        <div class="proj">
+          <div class="proj-head"><span class="proj-name">Unlost in Translation — Open-Source Contribution</span><span class="proj-meta">project by Radu Marias</span></div>
+          <div class="stack">Kotlin Multiplatform · Compose · Ktor · WebSockets</div>
+          <ul>
+            <li>Contributor: helped restructure a single-module Android app into a multiplatform project that also runs in the browser; 20+ pull requests reviewed and merged by the maintainer.</li>
+            <li>Built end-to-end encrypted two-phone conversations and ran a security audit that found an API key leaking through request URLs.</li>
+          </ul>
+        </div>
+
+        <div class="proj">
+          <div class="proj-head"><span class="proj-name">Shower Configurator — Client Desktop App</span><span class="proj-meta">in daily use</span></div>
+          <div class="stack">Java · Swing · MySQL</div>
+          <ul>
+            <li>Replaced a spreadsheet at a shower-cabin manufacturer: guides the sale, builds the bill of materials, prices it at the live BNR rate and exports a PDF quote.</li>
+            <li>Admin panel lets the business update products and prices without a developer.</li>
+          </ul>
+        </div>
+
+        <div class="proj">
+          <div class="proj-head"><span class="proj-name">Trading System with an ML Filter</span><span class="proj-meta">demo account</span></div>
+          <div class="stack">Python · XGBoost · scikit-learn · pandas · pytest</div>
+          <ul>
+            <li>End-to-end Python system running live: data pipeline, model training and validation, desktop GUI, and a test that blocks deployment if live inputs differ from training ones.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+</body>
+</html>
