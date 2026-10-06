@@ -3,7 +3,7 @@ import { WorkIndex } from "@/components/WorkIndex";
 import { site, stack } from "@/content/site";
 
 /**
- * Three decisions where the better-looking option lost. Each one is documented
+ * Decisions where the better-looking option lost. Each one is documented
  * in the repository it came from — this section exists because what someone
  * rejected says more than what they shipped.
  */
@@ -17,6 +17,11 @@ const discarded = [
     strike: "A model for the hard part",
     source: "Kira",
     body: "Reading heating and parking out of messy Romanian ad text is the part of the rental aggregator worth training a model on. It runs on regex instead: auditable when a listing comes out wrong, free per listing, and it works offline. The more impressive choice was the worse one.",
+  },
+  {
+    strike: "Unreal Engine 5",
+    source: "Escape With Your Friends",
+    body: "It was the engine everyone expected, and it lost on a property nobody puts in a comparison table: its Blueprints and assets are binary. In a project where coding agents write the code from a terminal, binary files are a blind spot the size of half the game. Unity keeps scenes and data as text, so every change is a diff someone can read and review.",
   },
   {
     strike: "Generated serializers",
@@ -76,7 +81,7 @@ export default function Home() {
       <Section id="work" label="Selected work" tone="deep">
         <div className="work-head">
           <h2 className="display-section">
-            Five systems, and what pins each one
+            Six systems, and what pins each one
           </h2>
           <p className="prose-col work-head-note">
             Each entry says what stands behind it, and the colour says who did

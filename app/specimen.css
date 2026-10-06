@@ -73,3 +73,103 @@
     gap: 0.5rem;
   }
 }
+
+/* ============================================================
+   Frame budget — one perf run as a bar list. Single series, so no
+   legend: the caption names it, every row carries its own value,
+   and the dashed line is the budget the tier is held to.
+   ============================================================ */
+
+.budget {
+  margin: 1.75rem 0 0;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.1rem;
+  max-width: 44rem;
+}
+
+.budget-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.6875rem;
+}
+
+.budget-row {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr) 2.5rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1px 0;
+}
+
+.budget-spot {
+  color: var(--ink-faint);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.budget-track {
+  position: relative;
+  height: 0.5rem;
+}
+
+/* the budget line, drawn once per row so it reads as one rule */
+.budget-track::after {
+  content: "";
+  position: absolute;
+  left: var(--budget);
+  top: -2px;
+  bottom: -2px;
+  border-left: 1px dashed var(--ink-faint);
+}
+
+.budget-bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--evidence-machine);
+  border-radius: 0 4px 4px 0;
+  opacity: 0.85;
+}
+
+.budget-row:hover .budget-bar {
+  opacity: 1;
+}
+
+.budget-row:hover .budget-spot,
+.budget-row:hover .budget-ms {
+  color: var(--ink);
+}
+
+.budget-ms {
+  color: var(--ink-muted);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.budget-key {
+  margin: 0.9rem 0 0;
+  color: var(--ink-faint);
+  font-size: 0.6875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.budget-key-line {
+  display: inline-block;
+  width: 0;
+  height: 0.8rem;
+  border-left: 1px dashed var(--ink-faint);
+}
+
+@media (max-width: 34rem) {
+  .budget-row {
+    grid-template-columns: 7rem minmax(0, 1fr) 2.25rem;
+    gap: 0.5rem;
+  }
+}

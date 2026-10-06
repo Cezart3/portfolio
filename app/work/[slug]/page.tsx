@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EvidenceChip, evidenceSource } from "@/components/EvidenceChip";
 import { ExtractionSpecimen } from "@/components/ExtractionSpecimen";
+import { FrameBudget } from "@/components/FrameBudget";
 import { projects, projectBySlug } from "@/content/projects";
 
 export function generateStaticParams() {
@@ -101,6 +102,7 @@ export default async function WorkPage({
                 <p key={paragraph.slice(0, 24)}>{paragraph}</p>
               ))}
               {section.figure === "extraction" ? <ExtractionSpecimen /> : null}
+              {section.figure === "frame-budget" ? <FrameBudget /> : null}
               {section.list ? (
                 <dl className="case-list">
                   {section.list.map((entry) => (

@@ -23,7 +23,7 @@ export interface CaseSection {
   body: string[];
   list?: { term: string; text: string }[];
   /** Renders a worked example under the prose. */
-  figure?: "extraction";
+  figure?: "extraction" | "frame-budget";
 }
 
 export interface Project {
@@ -148,6 +148,221 @@ export const projects: Project[] = [
           "So that the interface can be looked at without installing anything, there is a demo — and everything in it is invented. A generator composes Romanian ad text from templates and runs that text through the app's own extractors and matching service, which means the demo exercises the real pipeline: the same routes, the same queries, the same heating and parking classifiers, the same parking-proximity matching. Only the ads underneath are made up, and a banner says so on every screen.",
           "Two routes are closed in demo mode, because they are the only ones that can reach a third party. Scraping returns 403, so a public instance can never pull from a listing site. The image proxy returns 404, because an image proxy on a public host is an open door and the invented listings have no photos anyway. Geocoding is answered from a bundled table of well-known places rather than from Nominatim — a public instance should not send a shared community service whatever strangers type into a search box.",
           "For real listings, the answer is still to run it locally. That is what the tool is for.",
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "escape-with-your-friends",
+    name: "Escape With Your Friends",
+    index:
+      "Four-player co-op survival game in Unity — I direct and playtest, coding agents write the C#",
+    summary:
+      "A deliberately stupid co-op game for Steam: four friends stranded on an island punch, taser, carry and run each other over on the way to buying a boat, rebuilding a plane and getting out. Networked over Steam with no servers. I run it like a small studio where the programmers are coding agents — I set the scope, write the issues, playtest, and decide what is fun; they write the C#, and every system has to pass a headless test before it counts as done.",
+    kind: "Personal project · source-visible, heading for Steam",
+    period: "Aug — Oct 2026",
+    role: "Director, playtester and reviewer. The C# is written by Claude Code.",
+    evidence: {
+      mark: "Proven",
+      detail: "~70 headless test harnesses, some across two processes · frame times measured on the min-spec GPU",
+      strong: true,
+    },
+    metric: {
+      value: "136",
+      label: "pull requests merged in five weeks, from an empty repo",
+    },
+    stack: [
+      "Unity 6",
+      "C#",
+      "FishNet",
+      "Steamworks",
+      "URP",
+      "Blender",
+      "Claude Code",
+      "GitHub Actions",
+    ],
+    links: [
+      {
+        label: "Repository",
+        href: "https://github.com/Cezart3/Escape-With-Your-Friends",
+      },
+      {
+        label: "ARCHITECTURE.md — every system, and what broke",
+        href: "https://github.com/Cezart3/Escape-With-Your-Friends/blob/main/docs/ARCHITECTURE.md",
+      },
+      {
+        label: "PERF.md — the frame-time log",
+        href: "https://github.com/Cezart3/Escape-With-Your-Friends/blob/main/docs/PERF.md",
+      },
+    ],
+    note: "Not on Steam yet. The game is playable end to end, from the first beach to the ending, but the test that matters most — four real players, one session, does anyone laugh — is still an open issue. The store page waits on that, the art pass and the Steam Direct fee. I do not claim C# or Unity fluency from this — the point of the project is the process around the code.",
+    sections: [
+      {
+        title: "The game",
+        body: [
+          "You wake up on a beach with three friends. To get off the island you need money, then a boat, then a second and much nastier island, then the parts of a crashed plane, then the one friend who got left behind. In between there is hunting, fishing, crafting, hostile natives, a buggy, and a casino the castaways built out of driftwood, with roulette, blackjack and slot machines that run on chips you cannot spend anywhere else.",
+          "None of that is the point. The point is that the physics are bad on purpose and your friends are a hazard: you can punch them, stun them, pick them up, throw them off a cliff and then pay to revive them in a machine that looks exactly as dumb as it sounds. The references are How to Fish and Content Warning, not anything serious.",
+        ],
+      },
+      {
+        title: "Who does what",
+        body: [
+          "I did not type the C# in this project, and I am not going to pretend otherwise. Claude Code writes the code, the editor scripts that generate the content, the test harnesses and the architecture notes. What the agent cannot do is play the game, decide whether something is funny, or judge whether it looks right — so that is my job, along with deciding what gets built and in which order.",
+          "In practice that means a tracked tree of 185 issues under fourteen milestones, a written working agreement any new agent session reads before its first change, and a rule that an issue whose acceptance is a human verdict stops and waits for me rather than inventing a number and calling it green. For a while two agent accounts worked in parallel, which needed its own protocol: separate working trees, separate build folders, separate port ranges, and one shared file that only one of them may touch at a time.",
+        ],
+      },
+      {
+        title: "Why Unity, and why not Unreal",
+        body: [
+          "Unreal was the obvious pick and lost on one property. Its Blueprints and asset files are binary, which makes an agent working from a terminal blind to half the project. Unity stores scenes, prefabs and data assets as text, so every change is a diff someone can read.",
+          "The project leans into that. Nobody hand-edits a scene: every piece of content — the island, the shop's inventory, the weapons, the casino — comes from an editor script run in batch mode, so it can be regenerated and reviewed. A new weapon or fish is a text file, not a session in the editor.",
+        ],
+      },
+      {
+        title: "The host decides everything",
+        body: [
+          "There are no servers. One player hosts over Steam's relay and the others connect through a lobby, so nobody forwards ports and nothing costs money per month. The catch is that the host is the only thing that can be trusted: damage, money, inventory, AI and every random roll are decided there, and clients only own their own movement.",
+          "The roulette wheel is the cleanest example of what that costs. The host rolls the number and sends the result — not a seed, not a wheel speed — so no client message can reach the outcome. The first test of it passed and was only half a test, because it ran on the host, and a host never receives its own broadcast. Run as two real processes, it failed straight away: the host said 10 and the client's wheel stopped on 0, because the spin duration lived only on the server and the client was still animating the old one. The fix was one extra field in the message. It would not have been found without the second process.",
+        ],
+      },
+      {
+        title: "Testing a game with no screen",
+        body: [
+          "Every non-trivial system ships with a headless harness: the game is built, launched in batch mode with a test flag, plays the scenario out and prints how many checks passed. There are around seventy of them. Some run a host and a client as two processes, because networking bugs live in the gap between them.",
+          "Two things that harnesses taught me about harnesses:",
+        ],
+        list: [
+          {
+            term: "A green run can be measuring the wrong player",
+            text: "— the natives' test failed four checks identically every time. It was not the AI: the suite was run with a second player connected, and a native hunts whoever is nearest. The fix was a check that names the problem — which body, how far away — instead of four confusing failures downstream.",
+          },
+          {
+            term: "Batch mode exits 0 on a failed build",
+            text: "— so every build is followed by grepping the log for compiler errors. A test run on yesterday's binary passes beautifully.",
+          },
+          {
+            term: "A bot that plays the first island",
+            text: "in a real window, through the same input code a keyboard uses, screenshotting each step. Its first walk found that the shop drew sixteen rows of a twenty-four-item shelf, hiding the boat part the whole island is saving for, and that a full wipe left the run stuck forever.",
+          },
+          {
+            term: "What is not tested",
+            text: "— a headless build has no UI canvas, so no menu or HUD can be harness-tested. Those bugs are found by reading and by playing, and the docs say so.",
+          },
+        ],
+      },
+      {
+        title: "Measured on the laptop it has to run on",
+        body: [
+          "The target is a game that runs on almost any PC, so the minimum spec is an integrated Radeon 760M, not an afterthought. A scripted camera route stops at fixed spots across both islands, holds each one for five seconds with the frame cap off, and appends the timings to a log in the repository, tier by tier, on both the integrated and a dedicated GPU.",
+          "That log changed decisions. The first run showed the RTX 4060 barely faster than the integrated chip on low settings — the CPU was the floor on every tier — and that the cost of the high tier was draw calls at long range, which is where the optimisation pass started. Any change that makes the medium tier slower on the 760M by more than a millisecond has to say why in its pull request.",
+        ],
+        figure: "frame-budget",
+      },
+      {
+        title: "Where it stands",
+        body: [
+          "Milestones zero to seven are closed: the networked core, the first island, survival, the economy and combat, vehicles, the casino, the second island and the ending. Since then there have been two rounds of my own playtesting and the fixes they produced, a cutscene system, a bigger casino, and the placeholder models replaced with ones modelled in Blender.",
+          "What is left is the art pass, the four-player playtest, and Steam itself. The playtest was set as a gate from the first week: if four people in an empty arena are not laughing within twenty minutes, the core is wrong and no amount of island will fix it. It is the one check no harness can run. The upload script, store copy and release checklist are written; the app id, the fee and the store page need a person and a card. The CI build is wired but skips — green, with a notice — until there is a Unity licence secret, because a workflow that fails red on every push until someone does paperwork gets muted, and a muted check is worse than none.",
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "trading-bot",
+    name: "TradingBot",
+    index: "Opening-range breakout on US30, filtered by a calibrated ML model",
+    summary:
+      "A day-trading bot for the Dow Jones CFD running live against MetaTrader 5. The trading rule is deliberately simple. The work is in the model that decides which breakouts are worth taking, and in the discipline that stops that model from fooling itself.",
+    kind: "Personal project · code private, write-up public",
+    period: "2025 — 2026",
+    evidence: {
+      mark: "Validated",
+      detail: "walk-forward across 5 expanding windows · bootstrapped lift over baseline",
+      strong: true,
+    },
+    metric: {
+      value: "~3,000",
+      label: "labelled trades, 67 causal features each",
+    },
+    stack: [
+      "Python",
+      "XGBoost",
+      "LightGBM",
+      "scikit-learn",
+      "Optuna",
+      "SHAP",
+      "pandas",
+      "NumPy",
+      "PyArrow",
+      "MetaTrader 5 API",
+      "pydantic",
+      "CustomTkinter",
+      "pytest",
+    ],
+    links: [
+      { label: "Write-up", href: "https://github.com/Cezart3/TradingBot" },
+    ],
+    note: "The source is private: the bot is in demo forward-testing and the strategy is the whole edge. The write-up documents the engineering. It has never traded real money.",
+    sections: [
+      {
+        title: "The problem, stated as classification",
+        body: [
+          "A raw opening-range breakout on US30 is barely profitable. Backtested honestly with a realistic ECN spread it sits near break-even, around a 35% win rate at two-to-one. There is an edge in there, buried in noise.",
+          "So the task is not predicting the market. It is: given everything observable at the moment a breakout fires, estimate the probability that this specific trade reaches +2R before −1R, and take only the trades whose calibrated probability clears a learned threshold. Framed that way it becomes measurable — the model is judged on calibration and expected R per trade, not on accuracy, and the decision to deploy comes from out-of-sample expectancy rather than a good-looking backtest.",
+        ],
+      },
+      {
+        title: "Features that could have been known at the time",
+        body: [
+          "The training set comes from replaying the strategy bar by bar across eight years of five-minute data and labelling each trade by what actually happened. Every trade is described by 67 features, all computed causally from information available at entry: the geometry of the setup, multi-timeframe context joined by an as-of merge against the last closed bar on each timeframe, and session and calendar position.",
+          "Features that looked predictive but carried no real information — raw price levels, CFD tick volume — were dropped after analysis rather than kept because they improved a number.",
+        ],
+      },
+      {
+        title: "Closing the ways this silently breaks",
+        body: [
+          "Most machine learning applied to trading fails because the evaluation leaks, not because the model is weak. The pipeline is built around that:",
+        ],
+        list: [
+          {
+            term: "Time-ordered splits, never random",
+            text: "— train, calibration and test are contiguous in time, so the model is always tested on its own future.",
+          },
+          {
+            term: "Purged cross-validation with a gap and an embargo",
+            text: "so a trade whose daily-timeframe lookback overlaps the next segment cannot leak its label across the boundary.",
+          },
+          {
+            term: "The threshold is chosen on calibration and reported on test",
+            text: ". Picking the operating point on the same data you report is the most common way a backtest gets inflated.",
+          },
+          {
+            term: "A feature-parity test as the deploy gate",
+            text: "— a golden-vector test asserts the live feature builder produces the same vectors as the training pipeline, to float tolerance. It caught a real look-ahead bug where the two disagreed.",
+          },
+        ],
+      },
+      {
+        title: "Making the probabilities mean something",
+        body: [
+          "The filter is an ensemble of gradient-boosted trees, XGBoost and LightGBM, each tuned by Optuna over 200 trials optimising the Brier score rather than accuracy — because the strategy depends on the probabilities being honest, not merely well-ranked. Raw scores then pass through isotonic regression fitted on the held-out calibration set, so a 0.6 really does mean roughly a 60% win rate, and that claim is checked with reliability diagrams and log loss.",
+          "SHAP values rank what the model is leaning on, and it is retrained on the top 70% of features to confirm the edge is not resting on a few fragile inputs. Risk of ruin is modelled separately: bootstrap intervals on win rate and average R, and a Monte-Carlo trade shuffle to estimate the drawdown distribution and the chance of breaching a prop-firm limit at a given risk per trade.",
+        ],
+      },
+      {
+        title: "The test that killed the better-looking model",
+        body: [
+          "A filter that merely takes fewer trades can look good by luck. So the pipeline compares the average R of ML-selected trades against taking every rule-filtered signal, and bootstraps the difference over 5,000 resamples. The model ships only if the lower bound of that interval stays above zero.",
+          "That test rejected a variant I wanted to keep. A one-to-one configuration produced a much prettier 63% win rate — but its confidence interval for expectancy included zero and one walk-forward fold went negative. The two-to-one configuration, with a worse-looking win rate, held up in every fold. The prettier number lost.",
+        ],
+      },
+      {
+        title: "Live, and the brakes on it",
+        body: [
+          "At the New York open the bot builds the fifteen-minute range, takes the first five-minute close beyond it, filters weak setups by rule, then scores the survivor and trades only above threshold. Stop at the volume-profile point of control, target at 2R, one re-entry allowed after a stop, flat by the end of the session.",
+          "Risk is fixed at 1% per trade, halved after two consecutive losses, behind a daily-loss breaker and a maximum-drawdown breaker. Breaker state is persisted, so a restart in the middle of a bad session does not hand the bot a clean slate it has not earned.",
         ],
       },
     ],
@@ -288,99 +503,72 @@ export const projects: Project[] = [
   },
 
   {
-    slug: "trading-bot",
-    name: "TradingBot",
-    index: "Opening-range breakout on US30, filtered by a calibrated ML model",
+    slug: "rankup",
+    name: "RankUp",
+    index: "Chrome extension that parses CS2 demos in the browser to map opponents' positions",
     summary:
-      "A day-trading bot for the Dow Jones CFD running live against MetaTrader 5. The trading rule is deliberately simple. The work is in the model that decides which breakouts are worth taking, and in the discipline that stops that model from fooling itself.",
-    kind: "Personal project · code private, write-up public",
-    period: "2025 — 2026",
+      "A Manifest V3 extension that reads FACEIT match demos entirely in your browser and plots where each enemy player tends to play as anchor dots on the map radar. It runs with no backend at all.",
+    kind: "Personal project · public",
+    period: "Jul — Aug 2026",
     evidence: {
-      mark: "Validated",
-      detail: "walk-forward across 5 expanding windows · bootstrapped lift over baseline",
+      mark: "Proven",
+      detail: "400+ Vitest tests · typecheck clean · a test that fails on any unused permission",
       strong: true,
     },
-    metric: {
-      value: "~3,000",
-      label: "labelled trades, 67 causal features each",
-    },
+    metric: { value: "0", label: "servers — every demo is parsed client-side" },
     stack: [
-      "Python",
-      "XGBoost",
-      "LightGBM",
-      "scikit-learn",
-      "Optuna",
-      "SHAP",
-      "pandas",
-      "NumPy",
-      "PyArrow",
-      "MetaTrader 5 API",
-      "pydantic",
-      "CustomTkinter",
-      "pytest",
+      "React 19",
+      "TypeScript",
+      "Vite",
+      "Tailwind",
+      "Chrome MV3",
+      "WebAssembly",
+      "Web Workers",
+      "IndexedDB",
+      "Vitest",
     ],
     links: [
-      { label: "Write-up", href: "https://github.com/Cezart3/TradingBot" },
+      { label: "Repository", href: "https://github.com/Cezart3/RankUp" },
+      { label: "Privacy policy", href: "https://github.com/Cezart3/RankUp/blob/main/PRIVACY.md" },
     ],
-    note: "The source is private: the bot is in demo forward-testing and the strategy is the whole edge. The write-up documents the engineering. It has never traded real money.",
     sections: [
       {
-        title: "The problem, stated as classification",
+        title: "What it shows",
         body: [
-          "A raw opening-range breakout on US30 is barely profitable. Backtested honestly with a realistic ECN spread it sits near break-even, around a 35% win rate at two-to-one. There is an edge in there, buried in noise.",
-          "So the task is not predicting the market. It is: given everything observable at the moment a breakout fires, estimate the probability that this specific trade reaches +2R before −1R, and take only the trades whose calibrated probability clears a learned threshold. Framed that way it becomes measurable — the model is judged on calibration and expected R per trade, not on accuracy, and the decision to deploy comes from out-of-sample expectancy rather than a good-looking backtest.",
+          "Enter a FACEIT match lobby and the extension detects the voted map, reads the five enemy players, and plots each of their most-used positions on the radar. Not trajectories — anchors: the spots a player returns to across the most rounds, which is what you can actually prepare against.",
         ],
       },
       {
-        title: "Features that could have been known at the time",
+        title: "The pipeline, all of it client-side",
         body: [
-          "The training set comes from replaying the strategy bar by bar across eight years of five-minute data and labelling each trade by what actually happened. Every trade is described by 67 features, all computed causally from information available at entry: the geometry of the setup, multi-timeframe context joined by an as-of merge against the last closed bar on each timeframe, and session and calendar position.",
-          "Features that looked predictive but carried no real information — raw price levels, CFD tick volume — were dropped after analysis rather than kept because they improved a number.",
+          "For each enemy, recent matches on that map are fetched, the demo download URL is signed, the file is downloaded, Zstandard-decompressed, and parsed with a WebAssembly build of a Rust demo parser. A pool of web workers processes demos in parallel, so a full five-player lobby finishes in a couple of minutes.",
+          "Signing the demo URL was the awkward part: the endpoint is Cloudflare-protected, so the request has to go through a page on the site's own origin rather than from the extension directly.",
         ],
       },
       {
-        title: "Closing the ways this silently breaks",
+        title: "Turning positions into anchors",
         body: [
-          "Most machine learning applied to trading fails because the evaluation leaks, not because the model is weak. The pipeline is built around that:",
-        ],
-        list: [
-          {
-            term: "Time-ordered splits, never random",
-            text: "— train, calibration and test are contiguous in time, so the model is always tested on its own future.",
-          },
-          {
-            term: "Purged cross-validation with a gap and an embargo",
-            text: "so a trade whose daily-timeframe lookback overlaps the next segment cannot leak its label across the boundary.",
-          },
-          {
-            term: "The threshold is chosen on calibration and reported on test",
-            text: ". Picking the operating point on the same data you report is the most common way a backtest gets inflated.",
-          },
-          {
-            term: "A feature-parity test as the deploy gate",
-            text: "— a golden-vector test asserts the live feature builder produces the same vectors as the training pipeline, to float tolerance. It caught a real look-ahead bug where the two disagreed.",
-          },
+          "Positions are sampled ten to twenty seconds after each round starts, which skips the walk out of spawn without reaching the part of the round where everyone is reacting to contact. Those samples are clustered, and the top five spots per side are drawn, coloured by roster order.",
         ],
       },
       {
-        title: "Making the probabilities mean something",
+        title: "No backend, and what that buys",
         body: [
-          "The filter is an ensemble of gradient-boosted trees, XGBoost and LightGBM, each tuned by Optuna over 200 trials optimising the Brier score rather than accuracy — because the strategy depends on the probabilities being honest, not merely well-ranked. Raw scores then pass through isotonic regression fitted on the held-out calibration set, so a 0.6 really does mean roughly a 60% win rate, and that claim is checked with reliability diagrams and log loss.",
-          "SHAP values rank what the model is leaning on, and it is retrained on the top 70% of features to confirm the edge is not resting on a few fragile inputs. Risk of ruin is modelled separately: bootstrap intervals on win rate and average R, and a Monte-Carlo trade shuffle to estimate the drawdown distribution and the chance of breaching a prop-firm limit at a given risk per trade.",
+          "There is no server, so there is nothing to pay for and nothing to breach. No account, no analytics, no telemetry, and the dashboard makes zero third-party requests — the only origins it touches are the match API and the demo host.",
+          "The one sensitive thing it handles is your session cookie, which the demo-signing endpoint requires. It is held in memory for the duration of a scan, sent to one origin, and never stored or logged. Parsed results are cached locally for two weeks; the demo files themselves are never kept.",
         ],
       },
       {
-        title: "The test that killed the better-looking model",
+        title: "A paywall the compiler enforces",
         body: [
-          "A filter that merely takes fewer trades can look good by luck. So the pipeline compares the average R of ML-selected trades against taking every rule-filtered signal, and bootstraps the difference over 5,000 resamples. The model ships only if the lower bound of that interval stays above zero.",
-          "That test rejected a variant I wanted to keep. A one-to-one configuration produced a much prettier 63% win rate — but its confidence interval for expectancy included zero and one walk-forward fold went negative. The two-to-one configuration, with a worse-looking win rate, held up in every fold. The prettier number lost.",
+          "Version 1.1 adds a paid tier: where each opponent throws smokes and flashes, when, and how often a push follows. Manifest V3 forbids loading code from a server, so the paid features have to ship inside the free extension, switched off. The failure worth guarding against is not someone patching the bundle — that will always be possible in a browser, and stopping it would cost every honest user a server round trip. It is me rendering a paid feature without its gate by accident.",
+          "So paid data travels inside a wrapper type with no readable field, and exactly one function can open it. Forgetting the gate is a compile error rather than something a reviewer has to spot. The code says plainly that this is not a security boundary, because it is not one.",
         ],
       },
       {
-        title: "Live, and the brakes on it",
+        title: "Nothing ships on probably fine",
         body: [
-          "At the New York open the bot builds the fifteen-minute range, takes the first five-minute close beyond it, filters weak setups by rule, then scores the survivor and trades only above threshold. Stop at the volume-profile point of control, target at 2R, one re-entry allowed after a stop, flat by the end of the session.",
-          "Risk is fixed at 1% per trade, halved after two consecutive losses, behind a daily-loss breaker and a maximum-drawdown breaker. Breaker state is persisted, so a restart in the middle of a bad session does not hand the bot a clean slate it has not earned.",
+          "Before the store build, the whole codebase went through a written review brief: what is already verified, what to look at hardest, and which odd-looking behaviours are intentional. Every finding had to be fixed or rejected with a reason. The test suite is now past four hundred, there is a test that fails if the manifest asks for a permission the code never uses, and releasing is a script with the safe part as its default. Without a flag it only uploads a draft, which can be replaced. Publishing reaches every installed copy through auto-update and cannot be taken back, so it has to be asked for, and the package step refuses to overwrite a version that already exists — the build that was reviewed is the build that ships.",
         ],
       },
     ],
@@ -430,60 +618,6 @@ export const projects: Project[] = [
         title: "Keeping it current without me",
         body: [
           "A login-gated admin panel lets the business edit the catalogue itself: add and remove products, change elements, adjust prices and settings. Product ranges change and prices change more often, and a tool that needs a developer for either would have been abandoned within a year.",
-        ],
-      },
-    ],
-  },
-
-  {
-    slug: "rankup",
-    name: "RankUp",
-    index: "Chrome extension that parses CS2 demos in the browser to map opponents' positions",
-    summary:
-      "A Manifest V3 extension that reads FACEIT match demos entirely in your browser and plots where each enemy player tends to play as anchor dots on the map radar. It runs with no backend at all.",
-    kind: "Personal project · public",
-    period: "2026",
-    evidence: {
-      mark: "Shipped",
-      detail: "Chrome, Edge, Brave and Opera · no backend, no telemetry",
-    },
-    metric: { value: "0", label: "servers — every demo is parsed client-side" },
-    stack: [
-      "React 19",
-      "TypeScript",
-      "Vite",
-      "Tailwind",
-      "Chrome MV3",
-      "WebAssembly",
-      "Web Workers",
-      "IndexedDB",
-    ],
-    links: [{ label: "Repository", href: "https://github.com/Cezart3/RankUp" }],
-    sections: [
-      {
-        title: "What it shows",
-        body: [
-          "Enter a FACEIT match lobby and the extension detects the voted map, reads the five enemy players, and plots each of their most-used positions on the radar. Not trajectories — anchors: the spots a player returns to across the most rounds, which is what you can actually prepare against.",
-        ],
-      },
-      {
-        title: "The pipeline, all of it client-side",
-        body: [
-          "For each enemy, recent matches on that map are fetched, the demo download URL is signed, the file is downloaded, Zstandard-decompressed, and parsed with a WebAssembly build of a Rust demo parser. A pool of web workers processes demos in parallel, so a full five-player lobby finishes in a couple of minutes.",
-          "Signing the demo URL was the awkward part: the endpoint is Cloudflare-protected, so the request has to go through a page on the site's own origin rather than from the extension directly.",
-        ],
-      },
-      {
-        title: "Turning positions into anchors",
-        body: [
-          "Positions are sampled ten to twenty seconds after each round starts, which skips the walk out of spawn without reaching the part of the round where everyone is reacting to contact. Those samples are clustered, and the top five spots per side are drawn, coloured by roster order.",
-        ],
-      },
-      {
-        title: "No backend, and what that buys",
-        body: [
-          "There is no server, so there is nothing to pay for and nothing to breach. No account, no analytics, no telemetry, and the dashboard makes zero third-party requests — the only origins it touches are the match API and the demo host.",
-          "The one sensitive thing it handles is your session cookie, which the demo-signing endpoint requires. It is held in memory for the duration of a scan, sent to one origin, and never stored or logged. Parsed results are cached locally for two weeks; the demo files themselves are never kept.",
         ],
       },
     ],
