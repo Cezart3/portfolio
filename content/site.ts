@@ -7,7 +7,7 @@ export const site = {
   thesis:
     "I build complete systems on my own, and I keep track of which parts of them I can actually trust.",
   intro: [
-    "Computer science at the Technical University of Cluj-Napoca, going into my fourth year. Most of what I know came from finishing things: a rental aggregator that reads facts out of badly written Romanian ad text, a trading filter that had to survive its own validation before I would run it, a translation app I helped restructure until it also ran in a browser, and a four-player game where the agents write the code and my job is to decide whether it is any fun.",
+    "Computer science at the Technical University of Cluj-Napoca, now in my fourth year. Most of what I know came from finishing things: a rental aggregator that reads facts out of badly written Romanian ad text, a trading filter that had to survive its own validation before I would run it, a translation app I helped restructure until it also ran in a browser, and a four-player game where the agents write the code and my job is to decide whether it is any fun.",
     "The work is mostly Python, backend-shaped: data pipelines, typed APIs, model training that is honest about what it does not know. I write the tests first when the answer matters, and I write down which parts are still unproven when it does not.",
     "A lot of the typing is done by coding agents now. That changes what the job is, not whether it has to be right — I decide what gets built, set up how the agent works, then stand between what it produces and the main branch: reading the diffs, writing the tests that have to pass, and keeping a written record of what has never actually run. The habits on this page came from needing to trust code I did not type line by line.",
   ],
@@ -21,7 +21,7 @@ export const site = {
     school: "Technical University of Cluj-Napoca",
     degree: "BSc Computer Science",
     period: "Oct 2023 — present",
-    note: "Fourth year, starting October 2026.",
+    note: "Fourth year, since October 2026.",
   },
   languages: [
     { name: "Romanian", level: "Native" },
