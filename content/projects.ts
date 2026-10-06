@@ -160,13 +160,12 @@ export const projects: Project[] = [
       "Four-player co-op survival game in Unity — I direct and playtest, coding agents write the C#",
     summary:
       "A deliberately stupid co-op game for Steam: four friends stranded on an island punch, taser, carry and run each other over on the way to buying a boat, rebuilding a plane and getting out. Networked over Steam with no servers. I run it like a small studio where the programmers are coding agents — I set the scope, write the issues, playtest, and decide what is fun; they write the C#, and every system has to pass a headless test before it counts as done.",
-    kind: "Personal project · source-visible, heading for Steam",
-    period: "Aug — Oct 2026",
+    kind: "Personal project · in progress, Steam release planned",
+    period: "Aug 2026 — now",
     role: "Director, playtester and reviewer. The C# is written by Claude Code.",
     evidence: {
-      mark: "Proven",
-      detail: "~70 headless test harnesses, some across two processes · frame times measured on the min-spec GPU",
-      strong: true,
+      mark: "In progress",
+      detail: "playable end to end · ~70 headless test harnesses · Steam release planned",
     },
     metric: {
       value: "136",
@@ -196,7 +195,7 @@ export const projects: Project[] = [
         href: "https://github.com/Cezart3/Escape-With-Your-Friends/blob/main/docs/PERF.md",
       },
     ],
-    note: "Not on Steam yet. The game is playable end to end, from the first beach to the ending, but the test that matters most — four real players, one session, does anyone laugh — is still an open issue. The store page waits on that, the art pass and the Steam Direct fee. I do not claim C# or Unity fluency from this — the point of the project is the process around the code.",
+    note: "Still being built, with a Steam release as the goal. The game is playable end to end, from the first beach to the ending, but the test that matters most — four real players, one session, does anyone laugh — is still an open issue. The store page waits on that, the art pass and the Steam Direct fee. I do not claim C# or Unity fluency from this — the point of the project is the process around the code.",
     sections: [
       {
         title: "The game",

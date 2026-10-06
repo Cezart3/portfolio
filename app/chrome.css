@@ -247,6 +247,10 @@
   --hue: var(--evidence-world);
 }
 
+.index-row[data-source="building"] {
+  --hue: var(--evidence-building);
+}
+
 /* the row lights up in the colour of whatever vouches for it */
 .index-row::before {
   content: "";
@@ -580,6 +584,10 @@
 
 .case[data-source="world"] {
   --hue: var(--evidence-world);
+}
+
+.case[data-source="building"] {
+  --hue: var(--evidence-building);
 }
 
 .case-note {

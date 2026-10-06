@@ -217,6 +217,10 @@ a {
   --hue: var(--evidence-world);
 }
 
+.grade[data-source="building"] {
+  --hue: var(--evidence-building);
+}
+
 .grade-mark {
   font-weight: 700;
   color: var(--hue);

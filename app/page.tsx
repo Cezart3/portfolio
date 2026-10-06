@@ -89,8 +89,10 @@ export default function Home() {
             mean a machine did — a test suite that fails when the behaviour
             breaks, or an out-of-sample run built to kill the result.{" "}
             <strong>Merged</strong> means a person did: a maintainer reviewed
-            the work and took it. <strong>In use</strong> and{" "}
-            <strong>shipped</strong> mean the world did.
+            the work and took it. <strong>In use</strong> means the world
+            did.{" "}
+            <strong>In progress</strong> means nobody has yet: it is still
+            being built.
           </p>
         </div>
         <WorkIndex />

@@ -1,6 +1,6 @@
 import type { Evidence } from "@/content/projects";
 
-export type EvidenceSource = "machine" | "person" | "world";
+export type EvidenceSource = "machine" | "person" | "world" | "building";
 
 /**
  * Who did the checking. The chip's colour follows this, so the palette
@@ -13,6 +13,8 @@ export function evidenceSource(mark: string): EvidenceSource {
       return "machine";
     case "merged":
       return "person";
+    case "in progress":
+      return "building";
     default:
       return "world";
   }

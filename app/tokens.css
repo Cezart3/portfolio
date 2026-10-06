@@ -55,6 +55,8 @@
   --evidence-machine: #8aa2ff;
   --evidence-person: #bd8dff;
   --evidence-world: #e0b04a;
+  /* nobody has checked it yet: it is still being built */
+  --evidence-building: #98a1ab;
 
   /* a row borrows its own evidence hue on hover */
   --row-hue: var(--accent);
