@@ -48,6 +48,88 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "kira-mcp",
+    name: "kira-mcp",
+    index:
+      "MCP server that lets any AI assistant search Romanian rentals live, in every town",
+    summary:
+      "An MCP server, CLI and agent skill: you ask Claude, Cursor or any other MCP client for a flat in plain language, and it searches storia.ro, publi24.ro and lajumate.ro at that moment, reads the ads for heating, parking and who is renting, and works out the walk to the place you named. It covers every one of Romania's 3,181 municipalities, not a handful of cities. Open source, published on PyPI and in the official MCP Registry.",
+    kind: "Open source · MIT · on PyPI and the MCP Registry",
+    period: "Oct 2026",
+    role: "Scope, design decisions, review and testing. The Python is written by Claude Code.",
+    evidence: {
+      mark: "Proven",
+      detail: "73 tests, 10 of them against the live sites · CI on Linux and Windows · weekly live check",
+      strong: true,
+    },
+    metric: { value: "3,181", label: "localities, from cities down to communes" },
+    stack: [
+      "Python",
+      "MCP Python SDK",
+      "requests",
+      "BeautifulSoup",
+      "OpenStreetMap Nominatim",
+      "uv",
+      "pytest",
+      "ruff",
+      "GitHub Actions",
+      "Docker",
+    ],
+    links: [
+      { label: "Repository", href: "https://github.com/Cezart3/kira-mcp" },
+      { label: "PyPI — kira-rentals-mcp", href: "https://pypi.org/project/kira-rentals-mcp/" },
+      {
+        label: "Step-by-step guide (Romanian)",
+        href: "https://github.com/Cezart3/kira-mcp/blob/main/README.ro.md",
+      },
+    ],
+    sections: [
+      {
+        title: "Why a second Kira",
+        body: [
+          "Kira is a web app you run yourself: a scraper fills a local database, and the first run for a city takes ten minutes. That is fine for the city you live in and useless for the question people actually ask — \"what is there in Sibiu under 400 euro?\" — on a Tuesday, for a town you have never searched before.",
+          "kira-mcp keeps nothing. It searches when it is asked, from the machine of the person asking, and hands the answer to their own assistant. With no database there is nothing to republish, which is also why this one can be MIT-licensed when Kira is not.",
+          "Installing it is one line: claude mcp add kira -s user -- uvx kira-rentals-mcp.",
+        ],
+      },
+      {
+        title: "Every locality, not six cities",
+        body: [
+          "The locality list is all 3,181 Romanian municipalities from Wikidata, with the county, so Florești in Cluj and Florești in Prahova stay two different places, and \"tg mures\" or \"buc\" still find what was meant.",
+          "Small places exposed a quieter problem: when a town has few ads, the listing sites pad the results with the nearest city. A search in Șelimbăr came back full of Sibiu. Every result is now checked against the locality asked for, ads from elsewhere are dropped, and the answer says how many were dropped, so an empty result reads as \"nothing here\" rather than \"something broke\".",
+        ],
+      },
+      {
+        title: "Reading the ad only when the question needs it",
+        body: [
+          "Search pages give a title and a price. Heating and parking live in the ad itself, so the full page is fetched only when a filter depends on it, and only for the listings that could still match. Where a site gives a structured field — storia's heating value, publi24's attribute list, lajumate's private or company seller — that field wins over the prose.",
+          "The prose still decides most cases, and Romanian ads are written to be read by people. \"Centrală pe bloc\" is a shared boiler, not your own. \"Posibilitate de parcare în zonă\" is not a parking space. A flat in the rent category that says \"de vânzare\" and never mentions rent is for sale, and \"regim hotelier\" is a short stay unless the ad also offers a long-term contract. Phone numbers are redacted before the text reaches the model, including the ones written with dots and spaces to get past filters.",
+        ],
+      },
+      {
+        title: "No distance is better than a wrong one",
+        body: [
+          "Walking time comes from geocoding the street or neighbourhood with OpenStreetMap — one request a second, cached, and capped at twenty lookups per search, spent on the places that cover the most listings.",
+          "The trap was the address itself. Agencies on storia often leave the map pin at the default, the city centre, so a flat in Zorilor would show as five minutes from Piața Unirii. When the title names a different neighbourhood than the pin, the title wins and the pinned street is discarded. A listing that cannot be placed is not dropped and not guessed: it comes after the located ones, with no distance, and the answer says why.",
+        ],
+      },
+      {
+        title: "Tested against the sites, not just against fixtures",
+        body: [
+          "Sixty-three tests run offline against recorded pages. Ten more run against the real sites, across six cities and three small towns, and a weekly CI job runs them so a site changing its pages shows up as a red check rather than as users quietly getting fewer results.",
+          "Before release, a sweep over 61 localities came back with no errors and no ads from the wrong place, and no phone number survived in 272 results. The server was also driven end to end from Claude Code over stdio, the way a user would use it.",
+        ],
+      },
+      {
+        title: "What it does not do",
+        body: [
+          "OLX and imobiliare.ro answer automated requests with 403. kira-mcp does not work around that; the answer tells the user to check those two by hand. lajumate only gives the city, so its listings never get a distance and are listed after the ones that do.",
+        ],
+      },
+    ],
+  },
+
+  {
     slug: "kira",
     name: "Kira",
     index: "Rental aggregator for Romania, with the filters the listing sites don't have",

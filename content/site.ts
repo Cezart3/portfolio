@@ -68,6 +68,7 @@ export const stack = [
       "CustomTkinter",
       "LightGBM",
       "Optuna",
+      "MCP servers",
     ],
   },
   {

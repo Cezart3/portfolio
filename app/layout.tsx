@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     template: `%s — ${site.name}`,
   },
   description:
-    "Backend and machine-learning work by Cezar Tocaciu: a Romanian rental aggregator, a calibrated trading filter, a Kotlin Multiplatform translator, and a shower-cabin configurator in daily client use.",
+    "Backend and machine-learning work by Cezar Tocaciu: a Romanian rental aggregator and an MCP server that searches rentals for AI assistants, a calibrated trading filter, a Kotlin Multiplatform translator, and a shower-cabin configurator in daily client use.",
   authors: [{ name: site.name, url: site.url }],
   openGraph: {
     type: "website",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name} — ${site.role}`,
     description:
-      "Five systems, and the evidence behind each one. Python, Kotlin Multiplatform, machine learning.",
+      "Seven systems, and the evidence behind each one. Python, MCP, machine learning, Kotlin Multiplatform.",
   },
   robots: { index: true, follow: true },
 };

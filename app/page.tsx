@@ -19,6 +19,11 @@ const discarded = [
     body: "Reading heating and parking out of messy Romanian ad text is the part of the rental aggregator worth training a model on. It runs on regex instead: auditable when a listing comes out wrong, free per listing, and it works offline. The more impressive choice was the worse one.",
   },
   {
+    strike: "A distance for every listing",
+    source: "kira-mcp",
+    body: "Agencies often leave a listing's map pin on the city centre, so a flat across town shows up as five minutes from everything. Guessing a location for every ad would make the results look complete. Instead the neighbourhood named in the title overrides the pin, and an ad that still cannot be placed is listed last with no distance at all. A gap the user can see beats a number that is wrong.",
+  },
+  {
     strike: "Unreal Engine 5",
     source: "Escape With Your Friends",
     body: "It was the engine everyone expected, and it lost on a property nobody puts in a comparison table: its Blueprints and assets are binary. In a project where coding agents write the code from a terminal, binary files are a blind spot the size of half the game. Unity keeps scenes and data as text, so every change is a diff someone can read and review.",
@@ -81,7 +86,7 @@ export default function Home() {
       <Section id="work" label="Selected work" tone="deep">
         <div className="work-head">
           <h2 className="display-section">
-            Six systems, and what pins each one
+            Seven systems, and what pins each one
           </h2>
           <p className="prose-col work-head-note">
             Each entry says what stands behind it, and the colour says who did
